@@ -1,0 +1,22 @@
+Project 1-example
+Ye Wang
+
+
+In my project, I used 'CO' as an example to figure out how to plot the electron density as a 'fog' rather with isosurfaces. I also plot the atomic geometry in it to see the electron cloud around the atom positions.
+To further understand how the bond in the molecule CO affects the electron distribution relative to the isolated atom C and O, I plot deformation charge density figure and different charge density figure. The figures could show which part of the molecule is increasing and which part is decreasing and how the electron density distributes around the bond area.
+
+
+The steps are as follows:
+1 Calculate the centered position CO by DFT(shown in CO-centered.org).I used atoms.center() to get the centered position of C and O. And through calc.get_charge_density(), I also get the GHG and CHGCAR file. The (NGX, NGY, NGZ) is (96,96,96) and the electron density data begin from the 12 line. To compare effectively, I get the electron density of C and O at the position in the CO.
+2 Open a new script and input the position of centered CO molecule and plot the  molecule by using 'mlab.points3d'.
+3 Plot the bond between the atom C and O by using 'mlab.plot3d'.
+4 Input the electron density data from CHG or CHGCAR(I used CHG file). The CHG and CHGCAR are in the molecules/co-centered file which is generated from the calculation of the first step. Read lines of electron density data of CO, O and C separately. Form a new 3-D array with dimension of (96,96,96), which is the same dimension as that of electron density grid in CHG or CHGCAR.
+5 Visualize volumetric scalar data of electron density by using mlab.pipeline.scalar_field.
+As 'data.shape' probably transposes the 'data' array. So use the 'data.T' to visualize the electron density. Get min and max in data. Set the Vmin and Vmax.
+Here I plot the figures as follows:
+1)	 Electron density of CO. The ‘fog’ electron density figure shows that the electron is concentrated around the O. This is because O has larger electronegativity than C, e.t. ,O has more ability to attract electron.
+2)	 Electron density of C and O. I plot the isolated electron density of C and O for the purpose to compare how the electron density will change  before and after the formation of bond. It shows that the electron density of C changed a lot  and  O has higher electron density after forming a bond.
+3)	Pull out the atom to see what is left .
+    By minus electron density of O from that of CO, the figure shows that actually the O change a little after form a bond. But the bond changed in electron density.
+    By minus electron density of C form that of CO, the figure shows that C has much less density and the bond look similar as that with C.
+    By minus electron density of both O and C, the figure shows that the light blue area is the increased electron density area. So by comparison, we can tell the adjustment of electron density when forming the bond.

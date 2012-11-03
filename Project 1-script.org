@@ -1,0 +1,266 @@
+* Project 1
+* Ye Wang
+
+
+
+
+* Electron density of CO
+#+begin_src python
+import numpy as np
+from mayavi import mlab
+
+mlab.figure(1, bgcolor=(0, 0, 0), size=(350, 350))
+mlab.clf()
+
+atoms_x = np.array([4.42, 5.58])*96/10
+atoms_y = np.array([5.00, 5.00])*96/10
+atoms_z = np.array([5.00, 5.00])*96/10
+
+C = mlab.points3d(atoms_x[:1], atoms_y[:1], atoms_z[:1],
+                  scale_factor=3,
+                  resolution=20,
+                  color=(1, 0, 0),
+                  scale_mode='none')
+
+o = mlab.points3d(atoms_x[-1:], atoms_y[-1:], atoms_z[-1:],
+                   scale_factor=2,
+                   resolution=20,
+                   color=(1, 1, 1),
+                   scale_mode='none')
+
+mlab.plot3d(atoms_x, atoms_y, atoms_z, [0, 0],
+            tube_radius=0.4, colormap='Reds')
+
+
+str1 = ' '.join(file('coCHG').readlines()[12:])
+data1 = np.fromstring(str1, sep=' ')
+data1.shape = (96, 96, 96)
+
+
+source1 = mlab.pipeline.scalar_field(data1.T)
+min1 = data1.min()
+max1 = data1.max()
+vol1 = mlab.pipeline.volume(source1, vmin=min1,vmax=max1)
+
+mlab.view(azimuth=-90, elevation=90, distance=50)
+mlab.show()
+#+end_src
+
+
+
+
+
+* Electron density of isolated atoms
+#+begin_src python
+import numpy as np
+from mayavi import mlab
+
+mlab.figure(1, bgcolor=(0, 0, 0), size=(350, 350))
+mlab.clf()
+
+atoms_x = np.array([4.42, 5.58])*96/10
+atoms_y = np.array([5.00, 5.00])*96/10
+atoms_z = np.array([5.00, 5.00])*96/10
+
+C = mlab.points3d(atoms_x[:1], atoms_y[:1], atoms_z[:1],
+                  scale_factor=3,
+                  resolution=20,
+                  color=(1, 0, 0),
+                  scale_mode='none')
+
+o = mlab.points3d(atoms_x[-1:], atoms_y[-1:], atoms_z[-1:],
+                   scale_factor=2,
+                   resolution=20,
+                   color=(1, 1, 1),
+                   scale_mode='none')
+
+mlab.plot3d(atoms_x, atoms_y, atoms_z, [0, 0],
+            tube_radius=0.4, colormap='Reds')
+
+
+str2 = ' '.join(file('oCHG').readlines()[11:])
+data2 = np.fromstring(str2, sep=' ')
+data2.shape = (96, 96, 96)
+
+str3 = ' '.join(file('cCHG').readlines()[11:])
+data3 = np.fromstring(str3, sep=' ')
+data3.shape = (96, 96, 96)
+
+
+source2 = mlab.pipeline.scalar_field(data2.T)
+min2 = data2.min()
+max2 = data2.max()
+vol2 = mlab.pipeline.volume(source2, vmin=min2,vmax=max2)
+
+
+source3 = mlab.pipeline.scalar_field(data3.T)
+min3 = data3.min()
+max3 = data3.max()
+vol3= mlab.pipeline.volume(source3, vmin=min3,vmax=max3)
+
+
+mlab.view(azimuth=-90, elevation=90, distance=50)
+mlab.show()
+#+end_src
+
+
+* Electron Density with no O atom
+#+begin_src python
+import numpy as np
+from mayavi import mlab
+
+mlab.figure(1, bgcolor=(0, 0, 0), size=(350, 350))
+mlab.clf()
+
+atoms_x = np.array([4.42, 5.58])*96/10
+atoms_y = np.array([5.00, 5.00])*96/10
+atoms_z = np.array([5.00, 5.00])*96/10
+
+C = mlab.points3d(atoms_x[:1], atoms_y[:1], atoms_z[:1],
+                  scale_factor=3,
+                  resolution=20,
+                  color=(1, 0, 0),
+                  scale_mode='none')
+
+o = mlab.points3d(atoms_x[-1:], atoms_y[-1:], atoms_z[-1:],
+                   scale_factor=2,
+                   resolution=20,
+                   color=(1, 1, 1),
+                   scale_mode='none')
+
+mlab.plot3d(atoms_x, atoms_y, atoms_z, [0, 0],
+            tube_radius=0.4, colormap='Reds')
+
+
+str1 = ' '.join(file('coCHG').readlines()[12:])
+data1 = np.fromstring(str1, sep=' ')
+data1.shape = (96, 96, 96)
+
+str2 = ' '.join(file('oCHG').readlines()[11:])
+data2 = np.fromstring(str2, sep=' ')
+data2.shape = (96, 96, 96)
+
+
+data4=np.array(map(lambda x: x[0]-x[1], zip(data1,data2)))
+data4.shape=(96,96,96)
+
+source4 = mlab.pipeline.scalar_field(data4.T)
+min4 = data4.min()
+max4 = data4.max()
+vol4= mlab.pipeline.volume(source4, vmin=min4,vmax=max4)
+
+mlab.view(azimuth=-90, elevation=90, distance=50)
+mlab.show()
+
+#+end_src
+
+
+* Electron Density with no C atom
+#+begin_src python
+import numpy as np
+from mayavi import mlab
+
+mlab.figure(1, bgcolor=(0, 0, 0), size=(350, 350))
+mlab.clf()
+
+atoms_x = np.array([4.42, 5.58])*96/10
+atoms_y = np.array([5.00, 5.00])*96/10
+atoms_z = np.array([5.00, 5.00])*96/10
+
+C = mlab.points3d(atoms_x[:1], atoms_y[:1], atoms_z[:1],
+                  scale_factor=3,
+                  resolution=20,
+                  color=(1, 0, 0),
+                  scale_mode='none')
+
+o = mlab.points3d(atoms_x[-1:], atoms_y[-1:], atoms_z[-1:],
+                   scale_factor=2,
+                   resolution=20,
+                   color=(1, 1, 1),
+                   scale_mode='none')
+
+mlab.plot3d(atoms_x, atoms_y, atoms_z, [0, 0],
+            tube_radius=0.4, colormap='Reds')
+
+
+str1 = ' '.join(file('coCHG').readlines()[12:])
+data1 = np.fromstring(str1, sep=' ')
+data1.shape = (96, 96, 96)
+
+str3 = ' '.join(file('cCHG').readlines()[11:])
+data3 = np.fromstring(str3, sep=' ')
+data3.shape = (96, 96, 96)
+
+
+data4=np.array(map(lambda x: x[0]-x[1], zip(data1,data3)))
+data4.shape=(96,96,96)
+
+source4 = mlab.pipeline.scalar_field(data4.T)
+min4 = data4.min()
+max4 = data4.max()
+vol4= mlab.pipeline.volume(source4, vmin=min4,vmax=max4)
+
+mlab.view(azimuth=-90, elevation=90, distance=50)
+mlab.show()
+
+#+end_src
+
+
+
+* Electron Density without both atoms
+#+begin_src python
+
+import numpy as np
+from mayavi import mlab
+
+mlab.figure(1, bgcolor=(0, 0, 0), size=(350, 350))
+mlab.clf()
+
+atoms_x = np.array([4.42, 5.58])*96/10
+atoms_y = np.array([5.00, 5.00])*96/10
+atoms_z = np.array([5.00, 5.00])*96/10
+
+C = mlab.points3d(atoms_x[:1], atoms_y[:1], atoms_z[:1],
+                  scale_factor=3,
+                  resolution=20,
+                  color=(1, 0, 0),
+                  scale_mode='none')
+
+o = mlab.points3d(atoms_x[-1:], atoms_y[-1:], atoms_z[-1:],
+                   scale_factor=2,
+                   resolution=20,
+                   color=(1, 1, 1),
+                   scale_mode='none')
+
+mlab.plot3d(atoms_x, atoms_y, atoms_z, [0, 0],
+            tube_radius=0.4, colormap='Reds')
+
+
+str1 = ' '.join(file('coCHG').readlines()[12:])
+data1 = np.fromstring(str1, sep=' ')
+data1.shape = (96, 96, 96)
+
+str2 = ' '.join(file('oCHG').readlines()[11:])
+data2 = np.fromstring(str2, sep=' ')
+data2.shape = (96, 96, 96)
+
+str3 = ' '.join(file('cCHG').readlines()[11:])
+data3 = np.fromstring(str3, sep=' ')
+data3.shape = (96, 96, 96)
+
+
+data4=np.array(map(lambda x: x[0]-x[1]-x[2], zip(data1,data2, data3)))
+data4.shape=(96,96,96)
+
+
+
+source4 = mlab.pipeline.scalar_field(data4.T)
+min4 = data4.min()
+max4 = data4.max()
+vol4= mlab.pipeline.volume(source4, vmin=min4,vmax=max4)
+
+
+
+mlab.view(azimuth=-90, elevation=90, distance='auto')
+mlab.show()
+#+end_src

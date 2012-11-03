@@ -1,0 +1,26 @@
+Mini-project 1-Readme
+Ye Wang
+
+What is my project about?
+I used 'CO' as an example to figure out how to plot the electron density as a 'fog' rather with isosurfaces. I also plot the atomic geometry in it to see the electron cloud around the atom positions.
+To further understand how the bond in the molecule affects the electron distribution relative to the isolated atoms, I plot deformation charge density figure and difference charge density figure. The figures could show which part of the molecule increases and which part decreases and how the electron density distributes around the bond area.
+
+How to use my code?
+The steps are as follows:
+1 Calculate the centered position of atoms and molecule by DFT.
+Through DFT calculation, get the CHG and CHGCAR file of the centered molecule. CHG and CHGCAR include a grid of electron density data and the value of NGX, NGY, NGZ. As the molecule is centered, it has the specific position for each atoms. Calculate the electron density of the atoms separately at the position get above.
+2 Then, open a new file and input the position of centered atom or molecule and plot the atom or molecule by using 'mlab.points3d'.
+3 Plot the bond between the atoms by using 'mlab.plot3d'.
+4 Input the electron density data from CHG or CHGCAR file (I used CHG file). Read lines of electron density data. Form a new 3-D array which is the same dimension as that of electron density grid in CHG or CHGCAR.
+5 Visualize volumetric scalar data of electron density. As 'data.shape' probably transposes the 'data' array. So use the 'data.T' to visualize the electron density.
+  In this step, there could be different kinds of figures:
+    1)	 Electron density of molecule
+    2)	 Electron density only of atoms
+    3)	 Electron density of molecule pulled out certain atoms
+6 Get the final electron density figure and analyze the effect of the atoms and bond to the distribution of the electron density.
+
+What is my conclusion?
+Through plotting the electron density through visualize volumetric scalar data of electron density, we can learn how the interaction of atoms and the formation of bonds influence the distribution of electron density.
+
+Reference
+http://docs.enthought.com/mayavi/mayavi/auto/example_chemistry.html
